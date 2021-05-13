@@ -1,0 +1,135 @@
+# https://github.com/deplives/OpenWrt-CI
+
+
+name: Build OpenWrt
+
+on:
+  workflow_dispatch:
+
+env:
+  REPO: https://github.com/coolsnowwolf/lede
+  BRANCH: master
+  FEEDS_CONF: feeds.conf.default
+  CONFIG_FILE: x86-64.config
+  FEEDS_SH: feeds.sh
+  CONFIG_SH: config.sh
+  TIMEZONE: Asia/Shanghai
+
+jobs:
+
+  Compile:
+
+    runs-on: ubuntu-18.04
+
+    if: github.event.repository.owner.id == github.event.sender.id
+    
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@main
+
+    - name: space cleanup
+      run: |
+        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
+        sudo rm -rf /etc/apt/sources.list.d /usr/share/dotnet /usr/local/lib/android /etc/mysql /etc/php /opt/ghc
+        sudo -E apt-get -y autoremove --purge
+        sudo -E apt-get clean
+        df -hT $PWD
+
+    - name: installation dependencies
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      if: success() && !cancelled()
+      run: |
+        sudo timedatectl set-timezone "$TIMEZONE"
+        sudo -E apt-get update
+        sudo -E apt-get -y install $(curl -fsSL https://git.io/openwrt-ubuntu-1804)
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
+
+    - name: clone source code
+      working-directory: /workdir
+      if: success() && !cancelled()
+      run: |
+        git clone $REPO -b $BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+
+    - name: load custom feeds
+      if: success() && !cancelled()
+      run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
+    
+    - name: run feeds.sh
+      run: |
+        chmod +x $FEEDS_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$FEEDS_SH
+
+    - name: update feeds
+      if: success() && !cancelled()
+      run: cd openwrt && ./scripts/feeds update -a
+
+    - name: install feeds
+      if: success() && !cancelled()
+      run: cd openwrt && ./scripts/feeds install -a
+
+    - name: load custom configuration
+      if: success() && !cancelled()
+      run: |
+        [ -e files ] && mv files openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+
+    - name: run config.sh
+      run: |
+        chmod +x $CONFIG_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$CONFIG_SH
+
+    - name: download package
+      if: success() && !cancelled()
+      run: |
+        cd openwrt
+        make defconfig
+        make download -j8 V=s
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: compile firmware
+      if: success() && !cancelled()
+      run: |
+        cd openwrt
+        make -j$(nproc) || make -j1 V=s
+
+    - name: organize files
+      if: success() && !cancelled()
+      run: |
+        cd openwrt/bin/targets/*/*
+        shopt -s extglob
+        rm -rf !(*.img|*.vmdk)
+        shopt -u extglob
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+
+    - name: generate release tag
+      id: tag
+      if: success() && !cancelled()
+      run: |
+        echo "::set-output name=release_tag::OpenWrt-$(date +"%Y%m%d%H%M")"
+        touch release.txt
+
+    - name: release
+      uses: softprops/action-gh-release@v1
+      if: success() && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        body_path: release.txt
+        files: ${{ env.FIRMWARE }}/*
+
+    - name: push telegram message
+      uses: appleboy/telegram-action@master
+      if: success() && !cancelled()
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          ${{ steps.tag.outputs.release_tag }} 编译完成
