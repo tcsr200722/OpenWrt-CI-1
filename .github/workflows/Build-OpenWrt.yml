@@ -35,7 +35,7 @@ jobs:
         sudo -E apt-get clean
         df -hT $PWD
 
-    - name: installation dependencies
+    - name: install dependencies
       env:
         DEBIAN_FRONTEND: noninteractive
       if: success() && !cancelled()
@@ -67,7 +67,7 @@ jobs:
       if: success() && !cancelled()
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: load custom configuration
+    - name: load configuration
       if: success() && !cancelled()
       run: |
         [ -e files ] && mv files openwrt/files
@@ -84,7 +84,7 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        make download -j8 V=s
+        make download -j8
         find dl -size -1024c -exec rm -f {} \;
 
     - name: compile firmware
