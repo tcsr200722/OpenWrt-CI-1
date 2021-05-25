@@ -41,3 +41,9 @@ echo ' ------------------------------------------------------------- ' >> packag
 echo ' %D %V, %C                                                     ' >> package/base-files/files/etc/banner
 echo ' ------------------------------------------------------------- ' >> package/base-files/files/etc/banner
 echo '                                                               ' >> package/base-files/files/etc/banner
+
+# Modify zzz-default-settings
+echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/hd_idle.lua`'
+sed -i '/hd_idle.lua/d' package/lean/default-settings/files/zzz-default-settings
+echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/samba.lua`'
+sed -i '/samba.lua/d' package/lean/default-settings/files/zzz-default-settings
