@@ -17,6 +17,11 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 echo 'Modify default luci-app-ttyd...'
 rm -rf package/lean/luci-app-ttyd && git clone https://github.com/deplives/luci-app-ttyd.git package/lean/luci-app-ttyd
 
+# Modify default luci-app-samba
+# https://github.com/deplives/luci-app-samba
+echo 'Modify default luci-app-samba...'
+rm -rf feeds/luci/applications/luci-app-samba && git clone https://github.com/deplives/luci-app-samba.git feeds/luci/applications/luci-app-samba
+
 # Modify default NTP server
 echo 'Modify default NTP server...'
 sed -i 's/ntp1.aliyun.com/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
