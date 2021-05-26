@@ -5,6 +5,11 @@ name: Build OpenWrt
 
 on:
   workflow_dispatch:
+    inputs:
+      release:
+        description: 'release note'
+        required: true
+        default: 'regular'
 
 env:
   REPO: https://github.com/coolsnowwolf/lede
@@ -108,6 +113,7 @@ jobs:
       run: |
         echo "::set-output name=release_tag::OpenWrt-$(date +"%Y%m%d%H%M")"
         touch release.txt
+        echo ${{ github.event.inputs.release }} > release.txt
 
     - name: release
       uses: softprops/action-gh-release@v1
