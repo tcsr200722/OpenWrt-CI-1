@@ -22,6 +22,11 @@ rm -rf package/lean/luci-app-ttyd && git clone https://github.com/deplives/luci-
 echo 'Modify default luci-app-samba...'
 rm -rf feeds/luci/applications/luci-app-samba && git clone https://github.com/deplives/luci-app-samba.git feeds/luci/applications/luci-app-samba
 
+# Modify default luci-app-adbyby-plus
+# https://github.com/deplives/luci-app-adbyby-plus
+echo 'Modify default luci-app-adbyby-plus'
+rm -rf package/lean/luci-app-adbyby-plus && git clone https://github.com/deplives/luci-app-adbyby-plus.git package/lean/luci-app-adbyby-plus
+
 # Modify default NTP server
 echo 'Modify default NTP server...'
 sed -i 's/ntp1.aliyun.com/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
