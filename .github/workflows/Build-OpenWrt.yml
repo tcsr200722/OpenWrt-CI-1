@@ -68,10 +68,6 @@ jobs:
       if: success() && !cancelled()
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: install feeds
-      if: success() && !cancelled()
-      run: cd openwrt && ./scripts/feeds install -a
-
     - name: load configuration
       if: success() && !cancelled()
       run: |
@@ -83,6 +79,10 @@ jobs:
         chmod +x $CONFIG_SH
         cd openwrt
         $GITHUB_WORKSPACE/$CONFIG_SH
+    
+    - name: install feeds
+      if: success() && !cancelled()
+      run: cd openwrt && ./scripts/feeds install -a
 
     - name: download package
       if: success() && !cancelled()
