@@ -133,6 +133,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           ${{ steps.tag.outputs.release_tag }} 编译完成
+          ${{ github.event.inputs.release }}
 
     - name: compile has failed
       uses: appleboy/telegram-action@master
@@ -142,3 +143,4 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           ${{ steps.tag.outputs.release_tag }} 编译失败
+          ${{ github.event.inputs.release }}
