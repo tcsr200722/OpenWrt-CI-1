@@ -8,11 +8,6 @@
 echo 'Modify default theme...'
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
-# Modify default netdata
-# https://github.com/deplives/netdata
-echo 'Modify default netdata...'
-rm -rf feeds/packages/admin/netdata && git clone https://github.com/deplives/netdata.git feeds/packages/admin/netdata
-
 # Modify default luci-app-samba
 # https://github.com/deplives/luci-app-samba
 echo 'Modify default luci-app-samba...'
