@@ -8,14 +8,10 @@
 echo 'Modify default theme...'
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
-# Modify default luci-theme-argon
-# https://github.com/jerrykuku/luci-theme-argon
-# rm -rf package/lean/luci-theme-argon && git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
-
-# Modify default luci-app-ttyd
-# https://github.com/deplives/luci-app-ttyd
-echo 'Modify default luci-app-ttyd...'
-rm -rf package/lean/luci-app-ttyd && git clone https://github.com/deplives/luci-app-ttyd.git package/lean/luci-app-ttyd
+# Modify default netdata
+# https://github.com/deplives/netdata
+echo 'Modify default netdata'
+rm -rf feeds/packages/admin/netdata && git clone https://github.com/deplives/netdata.git feeds/packages/admin/netdata
 
 # Modify default luci-app-samba
 # https://github.com/deplives/luci-app-samba
@@ -28,6 +24,11 @@ rm -rf feeds/luci/applications/luci-app-samba && git clone https://github.com/de
 echo 'Modify default adbyby and luci-app-adbyby-plus'
 rm -rf package/lean/adbyby && git clone https://github.com/deplives/adbyby.git package/lean/adbyby
 rm -rf package/lean/luci-app-adbyby-plus && git clone https://github.com/deplives/luci-app-adbyby-plus.git package/lean/luci-app-adbyby-plus
+
+# Modify default luci-app-ttyd
+# https://github.com/deplives/luci-app-ttyd
+echo 'Modify default luci-app-ttyd...'
+rm -rf package/lean/luci-app-ttyd && git clone https://github.com/deplives/luci-app-ttyd.git package/lean/luci-app-ttyd
 
 # Modify default NTP server
 echo 'Modify default NTP server...'
