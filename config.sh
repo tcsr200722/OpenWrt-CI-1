@@ -10,7 +10,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 
 # Modify default netdata
 # https://github.com/deplives/netdata
-echo 'Modify default netdata'
+echo 'Modify default netdata...'
 rm -rf feeds/packages/admin/netdata && git clone https://github.com/deplives/netdata.git feeds/packages/admin/netdata
 
 # Modify default luci-app-samba
@@ -21,7 +21,7 @@ rm -rf feeds/luci/applications/luci-app-samba && git clone https://github.com/de
 # Modify default adbyby and luci-app-adbyby-plus
 # https://github.com/deplives/adbyby
 # https://github.com/deplives/luci-app-adbyby-plus
-echo 'Modify default adbyby and luci-app-adbyby-plus'
+echo 'Modify default adbyby and luci-app-adbyby-plus...'
 rm -rf package/lean/adbyby && git clone https://github.com/deplives/adbyby.git package/lean/adbyby
 rm -rf package/lean/luci-app-adbyby-plus && git clone https://github.com/deplives/luci-app-adbyby-plus.git package/lean/luci-app-adbyby-plus
 
