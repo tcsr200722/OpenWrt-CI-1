@@ -20,6 +20,11 @@ echo 'Modify default adbyby and luci-app-adbyby-plus...'
 rm -rf package/lean/adbyby && git clone https://github.com/deplives/adbyby.git package/lean/adbyby
 rm -rf package/lean/luci-app-adbyby-plus && git clone https://github.com/deplives/luci-app-adbyby-plus.git package/lean/luci-app-adbyby-plus
 
+# Modify default luci-app-flowoffload
+# https://github.com/deplives/luci-app-flowoffload
+echo 'Modify default luci-app-flowoffload'
+rm -rf package/lean/luci-app-flowoffload && git clone https://github.com/deplives/luci-app-flowoffload.git package/lean/luci-app-flowoffload
+
 # Modify default luci-app-ttyd
 # https://github.com/deplives/luci-app-ttyd
 echo 'Modify default luci-app-ttyd...'
