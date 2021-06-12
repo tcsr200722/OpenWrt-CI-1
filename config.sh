@@ -41,20 +41,6 @@ sed -i 's/cn.pool.ntp.org/pool.ntp.org/g' package/base-files/files/bin/config_ge
 echo 'Modify default timezone...'
 sed -i 's/UTC/Asia\/Shanghai/g' package/base-files/files/bin/config_generate
 
-# Modify default banner
-echo 'Modify default banner...'
-echo '                                                               ' > package/base-files/files/etc/banner
-echo ' ██████╗ ██████╗ ███████╗███╗   ██╗██╗    ██╗██████╗ ████████╗ ' >> package/base-files/files/etc/banner
-echo '██╔═══██╗██╔══██╗██╔════╝████╗  ██║██║    ██║██╔══██╗╚══██╔══╝ ' >> package/base-files/files/etc/banner
-echo '██║   ██║██████╔╝█████╗  ██╔██╗ ██║██║ █╗ ██║██████╔╝   ██║    ' >> package/base-files/files/etc/banner
-echo '██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║██║███╗██║██╔══██╗   ██║    ' >> package/base-files/files/etc/banner
-echo '╚██████╔╝██║     ███████╗██║ ╚████║╚███╔███╔╝██║  ██║   ██║    ' >> package/base-files/files/etc/banner
-echo ' ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    ' >> package/base-files/files/etc/banner
-echo ' ------------------------------------------------------------- ' >> package/base-files/files/etc/banner
-echo ' %D %V, %C                                                     ' >> package/base-files/files/etc/banner
-echo ' ------------------------------------------------------------- ' >> package/base-files/files/etc/banner
-echo '                                                               ' >> package/base-files/files/etc/banner
-
 # Modify zzz-default-settings
 echo 'delete `sed -i 's#http://downloads.openwrt.org#https://mirrors.cloud.tencent.com/lede#g' /etc/opkg/distfeeds.conf`'
 sed -i '/mirrors.cloud.tencent.com/d' package/lean/default-settings/files/zzz-default-settings
@@ -70,3 +56,30 @@ sed -i '/samba.lua/d' package/lean/default-settings/files/zzz-default-settings
 
 # echo 'delete `sed -i 's/services/nas/g' /usr/lib/lua/luci/view/aria2/overview_status.htm`'
 # sed -i '/overview_status.htm/d' package/lean/default-settings/files/zzz-default-settings
+
+# Modify some html style
+# Modify admin/status/overview <td id="wan4_i" style="width:16px; text-align:center; padding:3px">
+echo 'Modify admin/status/overview <td id="wan4_i" style="width:16px; text-align:center; padding:3px">'
+sed -i 's/<td id="wan4_i" style="width:16px; text-align:center; padding:3px">/<td id="wan4_i" style="width:10%; text-align:center; padding:3px">/g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+
+# Modify admin/status/overview <td id="wan6_i" style="width:16px; text-align:center; padding:3px">
+echo 'Modify admin/status/overview <td id="wan6_i" style="width:16px; text-align:center; padding:3px">'
+sed -i 's/<td id="wan6_i" style="width:16px; text-align:center; padding:3px">/<td id="wan6_i" style="width:10%; text-align:center; padding:3px">/g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+
+# Modify admin/status/overview <td id="dsl_i" style="width:16px; text-align:center; padding:3px">
+echo 'Modify admin/status/overview <td id="dsl_i" style="width:16px; text-align:center; padding:3px">'
+sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td id="dsl_i" style="width:10%; text-align:center; padding:3px">/g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+
+# Modify default banner
+echo 'Modify default banner...'
+echo '                                                               ' > package/base-files/files/etc/banner
+echo ' ██████╗ ██████╗ ███████╗███╗   ██╗██╗    ██╗██████╗ ████████╗ ' >> package/base-files/files/etc/banner
+echo '██╔═══██╗██╔══██╗██╔════╝████╗  ██║██║    ██║██╔══██╗╚══██╔══╝ ' >> package/base-files/files/etc/banner
+echo '██║   ██║██████╔╝█████╗  ██╔██╗ ██║██║ █╗ ██║██████╔╝   ██║    ' >> package/base-files/files/etc/banner
+echo '██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║██║███╗██║██╔══██╗   ██║    ' >> package/base-files/files/etc/banner
+echo '╚██████╔╝██║     ███████╗██║ ╚████║╚███╔███╔╝██║  ██║   ██║    ' >> package/base-files/files/etc/banner
+echo ' ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    ' >> package/base-files/files/etc/banner
+echo ' ------------------------------------------------------------- ' >> package/base-files/files/etc/banner
+echo ' %D %V, %C                                                     ' >> package/base-files/files/etc/banner
+echo ' ------------------------------------------------------------- ' >> package/base-files/files/etc/banner
+echo '                                                               ' >> package/base-files/files/etc/banner
