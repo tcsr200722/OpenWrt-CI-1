@@ -61,14 +61,20 @@ sed -i '/samba.lua/d' package/lean/default-settings/files/zzz-default-settings
 # Modify admin/status/overview <td id="wan4_i" style="width:16px; text-align:center; padding:3px">
 echo 'Modify admin/status/overview <td id="wan4_i" style="width:16px; text-align:center; padding:3px">'
 sed -i 's/<td id="wan4_i" style="width:16px; text-align:center; padding:3px">/<td id="wan4_i" style="width:10%; text-align:center; padding:3px">/g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+sed -i 's/<td id="wan4_i" style="width:16px; text-align:center; padding:3px">/<td id="wan4_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/x86/index.htm
+sed -i 's/<td id="wan4_i" style="width:16px; text-align:center; padding:3px">/<td id="wan4_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/arm/index.htm
 
 # Modify admin/status/overview <td id="wan6_i" style="width:16px; text-align:center; padding:3px">
 echo 'Modify admin/status/overview <td id="wan6_i" style="width:16px; text-align:center; padding:3px">'
 sed -i 's/<td id="wan6_i" style="width:16px; text-align:center; padding:3px">/<td id="wan6_i" style="width:10%; text-align:center; padding:3px">/g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+sed -i 's/<td id="wan6_i" style="width:16px; text-align:center; padding:3px">/<td id="wan6_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/x86/index.htm
+sed -i 's/<td id="wan6_i" style="width:16px; text-align:center; padding:3px">/<td id="wan6_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/arm/index.htm
 
 # Modify admin/status/overview <td id="dsl_i" style="width:16px; text-align:center; padding:3px">
 echo 'Modify admin/status/overview <td id="dsl_i" style="width:16px; text-align:center; padding:3px">'
 sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td id="dsl_i" style="width:10%; text-align:center; padding:3px">/g' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td id="dsl_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/x86/index.htm
+sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td id="dsl_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/arm/index.htm
 
 # Modify default banner
 echo 'Modify default banner...'
