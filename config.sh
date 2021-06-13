@@ -86,6 +86,6 @@ echo '██║   ██║██╔═══╝ ██╔══╝  ██║�
 echo '╚██████╔╝██║     ███████╗██║ ╚████║╚███╔███╔╝██║  ██║   ██║    ' >> package/base-files/files/etc/banner
 echo ' ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    ' >> package/base-files/files/etc/banner
 echo ' ------------------------------------------------------------- ' >> package/base-files/files/etc/banner
-echo ' %D %V, %C                                                     ' >> package/base-files/files/etc/banner
+echo ' %D %V, %C @Bob                                                ' >> package/base-files/files/etc/banner
 echo ' ------------------------------------------------------------- ' >> package/base-files/files/etc/banner
 echo '                                                               ' >> package/base-files/files/etc/banner
