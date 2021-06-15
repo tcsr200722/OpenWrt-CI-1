@@ -32,7 +32,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@main
 
-    - name: space cleanup
+    - name: Space cleanup
       run: |
         sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
         sudo rm -rf /etc/apt/sources.list.d /usr/share/dotnet /usr/local/lib/android /etc/mysql /etc/php /opt/ghc
@@ -40,7 +40,7 @@ jobs:
         sudo -E apt-get clean
         df -hT $PWD
 
-    - name: install dependencies
+    - name: Install dependencies
       env:
         DEBIAN_FRONTEND: noninteractive
       if: success() && !cancelled()
@@ -51,40 +51,40 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
-    - name: clone source code
+    - name: Clone source code
       working-directory: /workdir
       if: success() && !cancelled()
       run: |
         git clone $REPO -b $BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: run feeds.sh
+    - name: Run feeds.sh
       run: |
         chmod +x $FEEDS_SH
         cd openwrt
         $GITHUB_WORKSPACE/$FEEDS_SH
 
-    - name: update feeds
+    - name: Update feeds
       if: success() && !cancelled()
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: load configuration
+    - name: Load configuration
       if: success() && !cancelled()
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG ] && mv $CONFIG openwrt/.config
 
-    - name: run config.sh
+    - name: Run config.sh
       run: |
         chmod +x $CONFIG_SH
         cd openwrt
         $GITHUB_WORKSPACE/$CONFIG_SH
     
-    - name: install feeds
+    - name: Install feeds
       if: success() && !cancelled()
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: download package
+    - name: Download package
       if: success() && !cancelled()
       run: |
         cd openwrt
@@ -92,13 +92,13 @@ jobs:
         make download -j8
         find dl -size -1024c -exec rm -f {} \;
 
-    - name: compile firmware
+    - name: Compile firmware
       if: success() && !cancelled()
       run: |
         cd openwrt
         make -j$(nproc) || make -j1 V=s
 
-    - name: organize files
+    - name: Organize files
       if: success() && !cancelled()
       run: |
         cd openwrt/bin/targets/*/*
@@ -107,7 +107,7 @@ jobs:
         shopt -u extglob
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
 
-    - name: generate release tag
+    - name: Generate release tag
       id: tag
       if: success() && !cancelled()
       run: |
@@ -115,7 +115,7 @@ jobs:
         touch release.txt
         echo ${{ github.event.inputs.release }} > release.txt
 
-    - name: release
+    - name: Release
       uses: softprops/action-gh-release@v1
       if: success() && !cancelled()
       env:
@@ -125,7 +125,7 @@ jobs:
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
 
-    - name: compile has succeeded
+    - name: Compile has succeeded
       uses: appleboy/telegram-action@master
       if: success() && !cancelled()
       with:
@@ -135,7 +135,7 @@ jobs:
           ${{ steps.tag.outputs.release_tag }} 编译完成
           ${{ github.event.inputs.release }}
 
-    - name: compile has failed
+    - name: Compile has failed
       uses: appleboy/telegram-action@master
       if: failure()
       with:
