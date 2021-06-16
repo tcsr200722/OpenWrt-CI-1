@@ -25,9 +25,11 @@ rm -rf package/lean/luci-app-adbyby-plus && git clone https://github.com/deplive
 echo 'Modify default luci-app-flowoffload'
 rm -rf package/lean/luci-app-flowoffload && git clone https://github.com/deplives/luci-app-flowoffload.git package/lean/luci-app-flowoffload
 
-# Modify default luci-app-ttyd
+# Modify default ttyd and luci-app-ttyd
+# https://github.com/deplives/ttyd
 # https://github.com/deplives/luci-app-ttyd
-echo 'Modify default luci-app-ttyd...'
+echo 'Modify default ttyd and luci-app-ttyd...'
+rm -rf feeds/packages/utils/ttyd && git clone https://github.com/deplives/ttyd.git feeds/packages/utils/ttyd
 rm -rf package/lean/luci-app-ttyd && git clone https://github.com/deplives/luci-app-ttyd.git package/lean/luci-app-ttyd
 
 # Modify default NTP server
