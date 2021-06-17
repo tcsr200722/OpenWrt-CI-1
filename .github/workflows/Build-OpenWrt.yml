@@ -32,6 +32,15 @@ jobs:
     - name: checkout
       uses: actions/checkout@main
 
+    - name: Job start
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          编译任务开始
+          ${{ github.event.inputs.release }}
+
     - name: Space cleanup
       run: |
         sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
@@ -96,7 +105,7 @@ jobs:
       if: success() && !cancelled()
       run: |
         cd openwrt
-        make -j$(nproc) || make -j1 V=s
+        make -j$(nproc)
 
     - name: Organize files
       if: success() && !cancelled()
@@ -132,15 +141,16 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          ${{ steps.tag.outputs.release_tag }} 编译完成
+          编译任务完成
           ${{ github.event.inputs.release }}
+          ${{ steps.tag.outputs.release_tag }}
 
     - name: Compile has failed
       uses: appleboy/telegram-action@master
-      if: failure()
+      if: failure() || cancelled()
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          ${{ steps.tag.outputs.release_tag }} 编译失败
+          编译任务失败
           ${{ github.event.inputs.release }}
