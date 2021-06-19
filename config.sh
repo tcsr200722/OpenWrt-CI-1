@@ -47,8 +47,8 @@ sed -i 's/UTC/Asia\/Shanghai/g' package/base-files/files/bin/config_generate
 echo 'delete `sed -i 's#http://downloads.openwrt.org#https://mirrors.cloud.tencent.com/lede#g' /etc/opkg/distfeeds.conf`'
 sed -i '/mirrors.cloud.tencent.com/d' package/lean/default-settings/files/zzz-default-settings
 
-echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/hd_idle.lua`'
-sed -i '/hd_idle.lua/d' package/lean/default-settings/files/zzz-default-settings
+# echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/hd_idle.lua`'
+# sed -i '/hd_idle.lua/d' package/lean/default-settings/files/zzz-default-settings
 
 echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/samba.lua`'
 sed -i '/samba.lua/d' package/lean/default-settings/files/zzz-default-settings
