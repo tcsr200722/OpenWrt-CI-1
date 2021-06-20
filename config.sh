@@ -32,6 +32,10 @@ echo 'Modify default ttyd and luci-app-ttyd...'
 rm -rf feeds/packages/utils/ttyd && git clone https://github.com/deplives/ttyd.git feeds/packages/utils/ttyd
 rm -rf package/lean/luci-app-ttyd && git clone https://github.com/deplives/luci-app-ttyd.git package/lean/luci-app-ttyd
 
+# Modify default luci-app-diskman
+echo 'Modify default luci-app-diskman...'
+rm -rf package/lean/luci-app-diskman && git clone https://github.com/deplives/luci-app-diskman.git package/lean/luci-app-diskman
+
 # Modify default NTP server
 echo 'Modify default NTP server...'
 sed -i 's/ntp1.aliyun.com/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
