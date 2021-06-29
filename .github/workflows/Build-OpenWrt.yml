@@ -28,7 +28,7 @@ jobs:
 
   Compile:
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     if: github.event.repository.owner.id == github.event.sender.id
     
@@ -52,7 +52,7 @@ jobs:
       run: |
         sudo timedatectl set-timezone "$TIMEZONE"
         sudo -E apt-get update
-        sudo -E apt-get -y install $(curl -fsSL https://git.io/openwrt-ubuntu-1804)
+        sudo -E apt-get -y install $(curl -fsSL https://git.io/openwrt-ubuntu-2004)
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
