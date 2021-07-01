@@ -22,12 +22,12 @@ rm -rf package/lean/luci-app-adbyby-plus && git clone https://github.com/deplive
 
 # Modify default luci-app-flowoffload
 # https://github.com/deplives/luci-app-flowoffload
-echo 'Modify default luci-app-flowoffload'
+echo 'Modify default luci-app-flowoffload...'
 rm -rf package/lean/luci-app-flowoffload && git clone https://github.com/deplives/luci-app-flowoffload.git package/lean/luci-app-flowoffload
 
 # Modify default luci-app-turboacc
 # https://github.com/deplives/luci-app-turboacc
-echo 'Modify default luci-app-turboacc'
+echo 'Modify default luci-app-turboacc...'
 rm -rf package/lean/luci-app-turboacc && git clone https://github.com/deplives/luci-app-turboacc.git package/lean/luci-app-turboacc
 
 # Modify default ttyd and luci-app-ttyd
