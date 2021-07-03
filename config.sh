@@ -39,7 +39,7 @@ rm -rf package/lean/luci-app-ttyd && git clone https://github.com/deplives/luci-
 
 # Modify default NTP server
 echo 'Modify default NTP server...'
-sed -i 's/ntp1.aliyun.com/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
+sed -i 's/ntp.aliyun.com/ntp.ntsc.ac.cn/g' package/base-files/files/bin/config_generate
 sed -i 's/time1.cloud.tencent.com/ntp.aliyun.com/g' package/base-files/files/bin/config_generate
 sed -i 's/time.ustc.edu.cn/time.google.com/g' package/base-files/files/bin/config_generate
 sed -i 's/cn.pool.ntp.org/pool.ntp.org/g' package/base-files/files/bin/config_generate
