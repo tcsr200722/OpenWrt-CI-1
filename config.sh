@@ -48,6 +48,10 @@ sed -i 's/cn.pool.ntp.org/pool.ntp.org/g' package/base-files/files/bin/config_ge
 echo 'Modify default timezone...'
 sed -i 's/UTC/Asia\/Shanghai/g' package/base-files/files/bin/config_generate
 
+# Modify default LAN ip
+echo 'Modify default LAN ip...'
+sed -i 's/192.168.1.1/192.168.50.2/g' package/base-files/files/bin/config_generate
+
 # Modify zzz-default-settings
 echo 'delete `sed -i 's#downloads.openwrt.org#mirrors.cloud.tencent.com/lede#g' /etc/opkg/distfeeds.conf`'
 sed -i '/mirrors.cloud.tencent.com/d' package/lean/default-settings/files/zzz-default-settings
