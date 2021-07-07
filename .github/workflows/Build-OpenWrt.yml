@@ -3,26 +3,33 @@
 
 name: Build OpenWrt
 
+
 on:
+
   workflow_dispatch:
+
     inputs:
-      release:
-        description: 'release note'
-        required: true
-        default: 'regular'
-      
+
       commit:
         description: 'commit hash'
         required: false
         default: ''
 
+      release:
+        description: 'release note'
+        required: true
+        default: 'regular'
+
+
 env:
+
   REPO: https://github.com/coolsnowwolf/lede
   BRANCH: master
   CONFIG: x86-64.config
   FEEDS_SH: feeds.sh
   CONFIG_SH: config.sh
   TIMEZONE: Asia/Shanghai
+
 
 jobs:
 
