@@ -1,9 +1,6 @@
 #!/bin/bash
 # https://github.com/deplives/OpenWrt-CI
 
-# Modify default IP
-# sed -i 's/192.168.1.1/192.168.50.2/g' package/base-files/files/bin/config_generate
-
 # Modify default theme
 echo 'Modify default theme...'
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
@@ -22,8 +19,8 @@ rm -rf package/lean/luci-app-adbyby-plus && git clone https://github.com/deplive
 
 # Modify default luci-app-flowoffload
 # https://github.com/deplives/luci-app-flowoffload
-echo 'Modify default luci-app-flowoffload...'
-rm -rf package/lean/luci-app-flowoffload && git clone https://github.com/deplives/luci-app-flowoffload.git package/lean/luci-app-flowoffload
+# echo 'Modify default luci-app-flowoffload...'
+# rm -rf package/lean/luci-app-flowoffload && git clone https://github.com/deplives/luci-app-flowoffload.git package/lean/luci-app-flowoffload
 
 # Modify default luci-app-turboacc
 # https://github.com/deplives/luci-app-turboacc
@@ -56,11 +53,11 @@ sed -i 's/192.168.1.1/192.168.50.2/g' package/base-files/files/bin/config_genera
 echo 'delete `sed -i 's#downloads.openwrt.org#mirrors.cloud.tencent.com/lede#g' /etc/opkg/distfeeds.conf`'
 sed -i '/mirrors.cloud.tencent.com/d' package/lean/default-settings/files/zzz-default-settings
 
-echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/hd_idle.lua`'
-sed -i '/hd_idle.lua/d' package/lean/default-settings/files/zzz-default-settings
-
 echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/samba.lua`'
 sed -i '/samba.lua/d' package/lean/default-settings/files/zzz-default-settings
+
+# echo 'delete `sed -i 's/\"services\"/\"nas\"/g' /usr/lib/lua/luci/controller/hd_idle.lua`'
+# sed -i '/hd_idle.lua/d' package/lean/default-settings/files/zzz-default-settings
 
 # Modify some html style
 # Modify admin/status/overview <td id="wan4_i" style="width:16px; text-align:center; padding:3px">
