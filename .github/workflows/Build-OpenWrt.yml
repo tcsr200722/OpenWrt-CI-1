@@ -160,7 +160,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          编译任务完成
+          OpenWrt 编译成功
           ${{ env.COMMITHASH }}
           ${{ steps.tag.outputs.release_tag }}
           ${{ github.event.inputs.release }}
@@ -172,6 +172,6 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          编译任务失败
+          OpenWrt 编译失败
           ${{ env.COMMITHASH }}
           ${{ github.event.inputs.release }}
