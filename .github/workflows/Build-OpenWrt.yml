@@ -123,7 +123,7 @@ jobs:
       if: success() && !cancelled()
       run: |
         cd openwrt
-        make -j$(nproc)
+        make -j$(nproc) || make -j1 V=sc
 
     - name: Organize files
       if: success() && !cancelled()
