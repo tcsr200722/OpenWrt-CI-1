@@ -115,7 +115,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          编译任务开始
+          编译开始
           ${{ env.COMMITHASH }}
           ${{ github.event.inputs.release }}
 
