@@ -60,11 +60,11 @@ sed -i '/samba.lua/d' package/lean/default-settings/files/zzz-default-settings
 # sed -i '/hd_idle.lua/d' package/lean/default-settings/files/zzz-default-settings
 
 # Modify distfeeds.conf
-echo 'delete `openwrt_helloworld` from `/etc/opkg/distfeeds.conf`'
-sed -i '/openwrt_helloworld/d' /etc/opkg/distfeeds.conf
+# echo 'delete `openwrt_helloworld` from `/etc/opkg/distfeeds.conf`'
+# sed -i '/openwrt_helloworld/d' /etc/opkg/distfeeds.conf
 
-echo 'delete `openwrt_deplives` from `/etc/opkg/distfeeds.conf`'
-sed -i '/openwrt_deplives/d' /etc/opkg/distfeeds.conf
+# echo 'delete `openwrt_deplives` from `/etc/opkg/distfeeds.conf`'
+# sed -i '/openwrt_deplives/d' /etc/opkg/distfeeds.conf
 
 # Modify some html style
 # Modify admin/status/overview <td id="wan4_i" style="width:16px; text-align:center; padding:3px">
