@@ -86,7 +86,7 @@ sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td
 sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td id="dsl_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/arm/index.htm
 
 # Add Commit Hash in Homepage
-echo 'Add Commit Hash in Homepage'
+echo 'Add Commit Hash in Homepage...'
 line=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm | awk -F ':' '{print $1}')
 sed -i "${line}a\                <tr><td width=\"33%\">Commit Hash</td><td>$1</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
 
