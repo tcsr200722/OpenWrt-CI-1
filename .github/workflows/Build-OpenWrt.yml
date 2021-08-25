@@ -23,7 +23,7 @@ on:
 
 env:
 
-  REPO: https://github.com/coolsnowwolf/lede
+  REPO: https://github.com/coolsnowwolf/lede.git
   BRANCH: master
   CONFIG: x86-64.config
   FEEDS_SH: feeds.sh
