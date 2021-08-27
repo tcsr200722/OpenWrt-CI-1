@@ -116,8 +116,8 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           编译开始
-          固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
-          配置 Commit Hash ${{ github.sha }}
+          Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          Config Commit Hash ${{ github.sha }}
           ${{ github.event.inputs.release }}
 
     - name: Compile firmware
@@ -141,8 +141,8 @@ jobs:
       run: |
         echo "::set-output name=release_tag::OpenWrt-$(date +"%Y%m%d%H%M")"
         touch release.txt
-        echo 固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }} > release.txt
-        echo 配置 Commit Hash ${{ github.sha }} >> release.txt
+        echo Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }} > release.txt
+        echo Config Commit Hash ${{ github.sha }} >> release.txt
         echo ${{ github.event.inputs.release }} >> release.txt
         
     - name: Release
@@ -163,8 +163,8 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           OpenWrt 编译成功
-          固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
-          配置 Commit Hash ${{ github.sha }}
+          Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          Config Commit Hash ${{ github.sha }}
           ${{ steps.tag.outputs.release_tag }}
           ${{ github.event.inputs.release }}
 
@@ -176,6 +176,6 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           OpenWrt 编译失败
-          固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
-          配置 Commit Hash ${{ github.sha }}
+          Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          Config Commit Hash ${{ github.sha }}
           ${{ github.event.inputs.release }}
