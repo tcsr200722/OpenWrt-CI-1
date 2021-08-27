@@ -141,8 +141,8 @@ jobs:
       run: |
         echo "::set-output name=release_tag::OpenWrt-$(date +"%Y%m%d%H%M")"
         touch release.txt
-        echo ${{ env.FIRMWARE_COMMITHASH }} > release.txt
-        echo ${{ github.sha }} >> release.txt
+        echo 固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }} > release.txt
+        echo 配置 Commit Hash ${{ github.sha }} >> release.txt
         echo ${{ github.event.inputs.release }} >> release.txt
         
     - name: Release
