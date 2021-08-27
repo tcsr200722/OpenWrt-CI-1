@@ -106,6 +106,6 @@ echo "╚██████╔╝██║     ███████╗██║
 echo " ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    " >> package/base-files/files/etc/banner
 echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
 echo " $1                                                            " >> package/base-files/files/etc/banner
-echo " %D %V, %C @Bob                                                " >> package/base-files/files/etc/banner
+echo " %D %V, %C @Bobby                                              " >> package/base-files/files/etc/banner
 echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
 echo "                                                               " >> package/base-files/files/etc/banner
