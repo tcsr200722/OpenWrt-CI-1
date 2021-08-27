@@ -85,15 +85,23 @@ sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td
 sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td id="dsl_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/x86/index.htm
 sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td id="dsl_i" style="width:10%; text-align:center; padding:3px">/g' package/lean/autocore/files/arm/index.htm
 
-# Add 编译版本 in Homepage
-echo 'Add Commit Hash in Homepage...'
+# Add Firmware Commit Hash in Homepage
+echo 'Add Firmware Commit Hash in Homepage...'
 line_feeds=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm | awk -F ':' '{print $1}')
 line_x86=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
 line_arm=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' package/lean/autocore/files/arm/index.htm | awk -F ':' '{print $1}')
-sed -i "${line_feeds}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
-sed -i "${line_x86}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm
-sed -i "${line_arm}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/arm/index.htm
+sed -i "${line_feeds}a\                <tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+sed -i "${line_x86}a\                <tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm
+sed -i "${line_arm}a\                <tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/arm/index.htm
 
+# Add Config Commit Hash in Homepage
+echo 'Add Config Commit Hash in Homepage...'
+line_feeds=$(grep -n "<tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm | awk -F ':' '{print $1}')
+line_x86=$(grep -n "<tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
+line_arm=$(grep -n "<tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/arm/index.htm | awk -F ':' '{print $1}')
+sed -i "${line_feeds}a\                <tr><td width=\"33%\">Config Hash</td><td>$2</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+sed -i "${line_x86}a\                <tr><td width=\"33%\">Config Hash</td><td>$2</td></tr>" package/lean/autocore/files/x86/index.htm
+sed -i "${line_arm}a\                <tr><td width=\"33%\">Config Hash</td><td>$2</td></tr>" package/lean/autocore/files/arm/index.htm
 
 # Modify default banner
 echo "Modify default banner..."

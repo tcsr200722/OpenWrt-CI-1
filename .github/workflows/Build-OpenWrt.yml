@@ -10,8 +10,8 @@ on:
 
     inputs:
 
-      commit:
-        description: 'commit hash'
+      firmware_commit:
+        description: 'firmware commit hash'
         required: false
         default: ''
 
@@ -70,10 +70,10 @@ jobs:
         git clone $REPO -b $BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        if [ -n "${{ github.event.inputs.commit }}" ]; then 
-          git reset --hard ${{ github.event.inputs.commit }}
+        if [ -n "${{ github.event.inputs.firmware_commit }}" ]; then 
+          git reset --hard ${{ github.event.inputs.firmware_commit }}
         fi
-        echo "COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        echo "FIRMWARE_COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
     - name: Run feeds.sh
       run: |
@@ -95,7 +95,7 @@ jobs:
       run: |
         chmod +x $CONFIG_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$CONFIG_SH ${{ env.COMMITHASH }}
+        $GITHUB_WORKSPACE/$CONFIG_SH ${{ env.FIRMWARE_COMMITHASH }} ${{ github.sha }}
     
     - name: Install feeds
       if: success() && !cancelled()
@@ -116,7 +116,8 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           编译开始
-          ${{ env.COMMITHASH }}
+          固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          配置 Commit Hash ${{ github.sha }}
           ${{ github.event.inputs.release }}
 
     - name: Compile firmware
@@ -140,7 +141,7 @@ jobs:
       run: |
         echo "::set-output name=release_tag::OpenWrt-$(date +"%Y%m%d%H%M")"
         touch release.txt
-        echo ${{ env.COMMITHASH }} > release.txt
+        echo ${{ env.FIRMWARE_COMMITHASH }} > release.txt
         echo ${{ github.event.inputs.release }} >> release.txt
         
     - name: Release
@@ -161,7 +162,8 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           OpenWrt 编译成功
-          ${{ env.COMMITHASH }}
+          固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          配置 Commit Hash ${{ github.sha }}
           ${{ steps.tag.outputs.release_tag }}
           ${{ github.event.inputs.release }}
 
@@ -173,5 +175,6 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           OpenWrt 编译失败
-          ${{ env.COMMITHASH }}
+          固件 Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          配置 Commit Hash ${{ github.sha }}
           ${{ github.event.inputs.release }}
