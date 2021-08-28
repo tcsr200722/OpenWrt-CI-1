@@ -95,7 +95,7 @@ jobs:
       run: |
         chmod +x $CONFIG_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$CONFIG_SH ${{ env.FIRMWARE_COMMITHASH }} ${{ github.sha }}
+        $GITHUB_WORKSPACE/$CONFIG_SH ${{ env.FIRMWARE_COMMITHASH }}
     
     - name: Install feeds
       if: success() && !cancelled()

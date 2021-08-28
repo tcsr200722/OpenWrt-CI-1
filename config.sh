@@ -90,18 +90,9 @@ echo 'Add Firmware Commit Hash in Homepage...'
 line_feeds=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm | awk -F ':' '{print $1}')
 line_x86=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
 line_arm=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' package/lean/autocore/files/arm/index.htm | awk -F ':' '{print $1}')
-sed -i "${line_feeds}a\                <tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
-sed -i "${line_x86}a\                <tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm
-sed -i "${line_arm}a\                <tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/arm/index.htm
-
-# Add Config Commit Hash in Homepage
-echo 'Add Config Commit Hash in Homepage...'
-line_feeds=$(grep -n "<tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm | awk -F ':' '{print $1}')
-line_x86=$(grep -n "<tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
-line_arm=$(grep -n "<tr><td width=\"33%\">Lede Hash</td><td>$1</td></tr>" package/lean/autocore/files/arm/index.htm | awk -F ':' '{print $1}')
-sed -i "${line_feeds}a\                <tr><td width=\"33%\">Config Hash</td><td>$2</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
-sed -i "${line_x86}a\                <tr><td width=\"33%\">Config Hash</td><td>$2</td></tr>" package/lean/autocore/files/x86/index.htm
-sed -i "${line_arm}a\                <tr><td width=\"33%\">Config Hash</td><td>$2</td></tr>" package/lean/autocore/files/arm/index.htm
+sed -i "${line_feeds}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
+sed -i "${line_x86}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm
+sed -i "${line_arm}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/arm/index.htm
 
 # Modify default banner
 echo "Modify default banner..."
@@ -113,8 +104,8 @@ echo "██║   ██║██╔═══╝ ██╔══╝  ██║�
 echo "╚██████╔╝██║     ███████╗██║ ╚████║╚███╔███╔╝██║  ██║   ██║    " >> package/base-files/files/etc/banner
 echo " ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    " >> package/base-files/files/etc/banner
 echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
-echo " Lede Hash    $1                                               " >> package/base-files/files/etc/banner
-echo " Config Hash  $2                                               " >> package/base-files/files/etc/banner
-echo " %D %V, %C @Bobby                                              " >> package/base-files/files/etc/banner
+echo " %D %C @Bobby                                                  " >> package/base-files/files/etc/banner
+echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
+echo " Commit Hash  $1                                               " >> package/base-files/files/etc/banner
 echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
 echo "                                                               " >> package/base-files/files/etc/banner
