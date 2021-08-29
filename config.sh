@@ -87,8 +87,8 @@ sed -i "${line}a\                <tr><td width=\"33%\">编译版本</td><td>$1</
 # Add Build Date in Homepage
 echo 'Add Build Date in Homepage...'
 build_date=$(date +"%Y-%m-%d %H:%M:%S")
-line=$(grep -n "<tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
-sed -i "${line}a\                <tr><td width=\"33%\">编译日期</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm
+line=$(grep -n "<tr><td width=\"33%\">编译版本</td><td>${build_date}</td></tr>" package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
+sed -i "${line}a\                <tr><td width=\"33%\">编译日期</td><td>${build_date}</td></tr>" package/lean/autocore/files/x86/index.htm
 
 # Modify default banner
 echo "Modify default banner..."
