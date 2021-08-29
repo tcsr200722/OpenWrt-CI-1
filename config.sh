@@ -100,8 +100,7 @@ echo "██║   ██║██╔═══╝ ██╔══╝  ██║�
 echo "╚██████╔╝██║     ███████╗██║ ╚████║╚███╔███╔╝██║  ██║   ██║    " >> package/base-files/files/etc/banner
 echo " ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    " >> package/base-files/files/etc/banner
 echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
-echo " %D %C @Bobby                                                  " >> package/base-files/files/etc/banner
-echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
+echo " %D %C ${build_date} @Bobby                                    " >> package/base-files/files/etc/banner
 echo " $1                                                            " >> package/base-files/files/etc/banner
 echo " ------------------------------------------------------------- " >> package/base-files/files/etc/banner
 echo "                                                               " >> package/base-files/files/etc/banner
