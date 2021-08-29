@@ -81,14 +81,14 @@ sed -i 's/<td id="dsl_i" style="width:16px; text-align:center; padding:3px">/<td
 
 # Add Firmware Commit Hash in Homepage
 echo 'Add Firmware Commit Hash in Homepage...'
-line=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
-sed -i "${line}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm
+line_kv=$(grep -n '<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>' package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
+sed -i "${line_kv}a\                <tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm
 
 # Add Build Date in Homepage
 echo 'Add Build Date in Homepage...'
 build_date=$(date +"%Y-%m-%d %H:%M:%S")
-line=$(grep -n "<tr><td width=\"33%\">编译版本</td><td>${build_date}</td></tr>" package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
-sed -i "${line}a\                <tr><td width=\"33%\">编译日期</td><td>${build_date}</td></tr>" package/lean/autocore/files/x86/index.htm
+line_bv=$(grep -n "<tr><td width=\"33%\">编译版本</td><td>$1</td></tr>" package/lean/autocore/files/x86/index.htm | awk -F ':' '{print $1}')
+sed -i "${line_bv}a\                <tr><td width=\"33%\">编译日期</td><td>${build_date}</td></tr>" package/lean/autocore/files/x86/index.htm
 
 # Modify default banner
 echo "Modify default banner..."
