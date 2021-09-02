@@ -80,9 +80,9 @@ jobs:
 
     - name: Cache toolchain
       uses: deplives/cacheopenwrt@main
-        with:
-          ccache: 'true'
-          prefix: ${{ github.workspace }}/openwrt
+      with:
+        ccache: 'true'
+        prefix: ${{ github.workspace }}/openwrt
 
 
     - name: Run feeds.sh
