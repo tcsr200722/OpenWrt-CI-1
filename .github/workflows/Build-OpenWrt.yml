@@ -48,9 +48,9 @@ jobs:
           fetch-depth: 0
     
     - name: Cache Toolchain
-        uses: klever1988/cachewrtbuild@main
-        with:
-          ccache: true
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: true
 
     - name: Space cleanup
       run: |
