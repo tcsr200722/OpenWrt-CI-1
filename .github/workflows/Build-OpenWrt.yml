@@ -46,11 +46,6 @@ jobs:
       with:
         ref: master
         fetch-depth: 0
-    
-    - name: Cache Toolchain
-      uses: klever1988/cachewrtbuild@main
-      with:
-        ccache: 'true'
 
     - name: Space cleanup
       run: |
@@ -82,6 +77,11 @@ jobs:
           git reset --hard ${{ github.event.inputs.firmware_commit }}
         fi
         echo "FIRMWARE_COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+    - name: Cache Toolchain
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
 
     - name: Run feeds.sh
       run: |
