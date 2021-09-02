@@ -43,6 +43,9 @@ jobs:
 
     - name: checkout
       uses: actions/checkout@main
+      with:
+        ref: master
+        fetch-depth: 0
 
     - name: Space cleanup
       run: |
@@ -74,6 +77,13 @@ jobs:
           git reset --hard ${{ github.event.inputs.firmware_commit }}
         fi
         echo "FIRMWARE_COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+    - name: Cache ToolChain
+      uses: deplives/cacheopenwrt@main
+        with:
+          ccache: 'true'
+          prefix: ${{ github.workspace }}/openwrt
+
 
     - name: Run feeds.sh
       run: |
