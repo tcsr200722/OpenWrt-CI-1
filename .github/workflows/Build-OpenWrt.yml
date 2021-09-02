@@ -52,6 +52,7 @@ jobs:
       with:
         ccache: true
 
+
     - name: Space cleanup
       run: |
         sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
