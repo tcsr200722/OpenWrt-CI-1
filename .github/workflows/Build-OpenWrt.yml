@@ -11,7 +11,7 @@ on:
     inputs:
 
       firmware_commit:
-        description: 'firmware commit hash'
+        description: 'commit hash'
         required: false
         default: ''
 
@@ -50,7 +50,7 @@ jobs:
     - name: Cache Toolchain
       uses: klever1988/cachewrtbuild@main
       with:
-        ccache: true
+        ccache: 'true'
 
     - name: Space cleanup
       run: |
