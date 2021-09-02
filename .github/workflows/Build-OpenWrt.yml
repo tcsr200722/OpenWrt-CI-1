@@ -78,7 +78,7 @@ jobs:
         fi
         echo "FIRMWARE_COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
-    - name: Cache ToolChain
+    - name: Cache toolchain
       uses: deplives/cacheopenwrt@main
         with:
           ccache: 'true'
