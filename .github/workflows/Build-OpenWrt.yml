@@ -76,7 +76,7 @@ jobs:
         if [ -n "${{ github.event.inputs.firmware_commit }}" ]; then 
           git reset --hard ${{ github.event.inputs.firmware_commit }}
         fi
-        echo "FIRMWARE_COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        echo "COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
     - name: Cache toolchain
       uses: deplives/cacheopenwrt@main
@@ -105,7 +105,7 @@ jobs:
       run: |
         chmod +x $CONFIG_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$CONFIG_SH ${{ env.FIRMWARE_COMMITHASH }}
+        $GITHUB_WORKSPACE/$CONFIG_SH ${{ env.COMMITHASH }}
     
     - name: Install feeds
       if: success() && !cancelled()
@@ -126,7 +126,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           编译开始
-          Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          Lede Commit Hash ${{ env.COMMITHASH }}
           Config Commit Hash ${{ github.sha }}
           ${{ github.event.inputs.release }}
 
@@ -151,7 +151,7 @@ jobs:
       run: |
         echo "::set-output name=release_tag::OpenWrt-$(date +"%Y%m%d%H%M")"
         touch release.txt
-        echo Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }} > release.txt
+        echo Lede Commit Hash ${{ env.COMMITHASH }} > release.txt
         echo Config Commit Hash ${{ github.sha }} >> release.txt
         echo ${{ github.event.inputs.release }} >> release.txt
         
@@ -173,7 +173,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           OpenWrt 编译成功
-          Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          Lede Commit Hash ${{ env.COMMITHASH }}
           Config Commit Hash ${{ github.sha }}
           ${{ steps.tag.outputs.release_tag }}
           ${{ github.event.inputs.release }}
@@ -186,6 +186,6 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           OpenWrt 编译失败
-          Lede Commit Hash ${{ env.FIRMWARE_COMMITHASH }}
+          Lede Commit Hash ${{ env.COMMITHASH }}
           Config Commit Hash ${{ github.sha }}
           ${{ github.event.inputs.release }}
