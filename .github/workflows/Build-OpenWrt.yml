@@ -10,7 +10,7 @@ on:
 
     inputs:
 
-      firmware_commit:
+      commit_hash:
         description: 'commit hash'
         required: false
         default: ''
@@ -73,8 +73,8 @@ jobs:
         git clone $REPO -b $BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        if [ -n "${{ github.event.inputs.firmware_commit }}" ]; then 
-          git reset --hard ${{ github.event.inputs.firmware_commit }}
+        if [ -n "${{ github.event.inputs.commit_hash }}" ]; then 
+          git reset --hard ${{ github.event.inputs.commit_hash }}
         fi
         echo "COMMITHASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
