@@ -46,7 +46,7 @@ echo 'Modify default timezone...'
 sed -i 's/UTC/Asia\/Shanghai/g' package/base-files/files/bin/config_generate
 
 # Modify default LAN ip
-echo 'Modify default LAN ip...'
+echo 'Modify default LAN IP...'
 sed -i 's/192.168.1.1/192.168.50.1/g' package/base-files/files/bin/config_generate
 
 # Modify zzz-default-settings
