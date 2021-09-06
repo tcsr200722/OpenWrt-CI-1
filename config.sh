@@ -47,7 +47,7 @@ sed -i 's/UTC/Asia\/Shanghai/g' package/base-files/files/bin/config_generate
 
 # Modify default LAN ip
 echo 'Modify default LAN ip...'
-sed -i 's/192.168.1.1/192.168.50.3/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.50.1/g' package/base-files/files/bin/config_generate
 
 # Modify zzz-default-settings
 echo 'delete `sed -i 's#downloads.openwrt.org#mirrors.cloud.tencent.com/lede#g' /etc/opkg/distfeeds.conf`'
